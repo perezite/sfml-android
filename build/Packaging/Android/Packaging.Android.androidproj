@@ -21,10 +21,6 @@
   <ItemGroup>
     <Content Include="AndroidManifest.xml" />
     <Content Include="build.xml" />
-    <Content Include="libs\armeabi-v7a\libSDL2.so" />
-    <Content Include="libs\armeabi-v7a\libSDL2_image.so" />
-    <Content Include="libs\x86\libSDL2.so" />
-    <Content Include="libs\x86\libSDL2_image.so" />
     <Content Include="res\values\strings.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -35,6 +31,9 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Platform\Android\Application\Application.Android.vcxproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="libs\x86\" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <RootNamespace>Application</RootNamespace>

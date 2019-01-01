@@ -70,8 +70,8 @@ public class SDLActivity extends Activity {
      */
     protected String[] getLibraries() {
         return new String[] {
-            "SDL2",
-            "SDL2_image",
+            // "SDL2",
+            // "SDL2_image",
             // "SDL2_mixer",
             // "SDL2_net",
             // "SDL2_ttf",
@@ -192,7 +192,7 @@ public class SDLActivity extends Activity {
             String filename = intent.getData().getPath();
             if (filename != null) {
                 Log.v(TAG, "Got filename: " + filename);
-                SDLActivity.onNativeDropFile(filename);
+                // SDLActivity.onNativeDropFile(filename);
             }
         }
     }
@@ -256,7 +256,7 @@ public class SDLActivity extends Activity {
            return;
         }
 
-        SDLActivity.nativeLowMemory();
+        // SDLActivity.nativeLowMemory();
     }
 
     @Override
@@ -272,7 +272,7 @@ public class SDLActivity extends Activity {
 
         // Send a quit message to the application
         SDLActivity.mExitCalledFromJava = true;
-        SDLActivity.nativeQuit();
+        // SDLActivity.nativeQuit();
 
         // Now wait for the SDL thread to quit
         if (SDLActivity.mSDLThread != null) {
@@ -318,7 +318,7 @@ public class SDLActivity extends Activity {
     public static void handlePause() {
         if (!SDLActivity.mIsPaused && SDLActivity.mIsSurfaceReady) {
             SDLActivity.mIsPaused = true;
-            SDLActivity.nativePause();
+            // SDLActivity.nativePause();
             mSurface.handlePause();
         }
     }
@@ -330,7 +330,7 @@ public class SDLActivity extends Activity {
     public static void handleResume() {
         if (SDLActivity.mIsPaused && SDLActivity.mIsSurfaceReady && SDLActivity.mHasFocus) {
             SDLActivity.mIsPaused = false;
-            SDLActivity.nativeResume();
+            // SDLActivity.nativeResume();
             mSurface.handleResume();
         }
     }
@@ -424,7 +424,7 @@ public class SDLActivity extends Activity {
 
     // C functions we call
     public static native int nativeInit(Object arguments);
-    public static native void nativeLowMemory();
+    /*public static native void nativeLowMemory();
     public static native void nativeQuit();
     public static native void nativePause();
     public static native void nativeResume();
@@ -450,7 +450,7 @@ public class SDLActivity extends Activity {
                                                int is_accelerometer, int nbuttons,
                                                int naxes, int nhats, int nballs);
     public static native int nativeRemoveJoystick(int device_id);
-    public static native String nativeGetHint(String name);
+    public static native String nativeGetHint(String name);*/
 
     /**
      * This method is called by SDL using JNI.
@@ -705,11 +705,13 @@ public class SDLActivity extends Activity {
     public InputStream openAPKExpansionInputStream(String fileName) throws IOException {
         // Get a ZipResourceFile representing a merger of both the main and patch files
         if (expansionFile == null) {
-            String mainHint = nativeGetHint("SDL_ANDROID_APK_EXPANSION_MAIN_FILE_VERSION");
+            // String mainHint = nativeGetHint("SDL_ANDROID_APK_EXPANSION_MAIN_FILE_VERSION");
+			String mainHint = null;
             if (mainHint == null) {
                 return null; // no expansion use if no main version was set
             }
-            String patchHint = nativeGetHint("SDL_ANDROID_APK_EXPANSION_PATCH_FILE_VERSION");
+            // String patchHint = nativeGetHint("SDL_ANDROID_APK_EXPANSION_PATCH_FILE_VERSION");
+			String patchHint = null;
             if (patchHint == null) {
                 return null; // no expansion use if no patch version was set
             }
@@ -1052,7 +1054,7 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
         // Call this *before* setting mIsSurfaceReady to 'false'
         SDLActivity.handlePause();
         SDLActivity.mIsSurfaceReady = false;
-        SDLActivity.onNativeSurfaceDestroyed();
+        // SDLActivity.onNativeSurfaceDestroyed();
     }
 
     // Called when the surface is resized
@@ -1108,7 +1110,7 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
 
         mWidth = width;
         mHeight = height;
-        SDLActivity.onNativeResize(width, height, sdlFormat, mDisplay.getRefreshRate());
+        // SDLActivity.onNativeResize(width, height, sdlFormat, mDisplay.getRefreshRate());
         Log.v("SDL", "Window size: " + width + "x" + height);
 
  
@@ -1149,7 +1151,7 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
 
         // Set mIsSurfaceReady to 'true' *before* making a call to handleResume
         SDLActivity.mIsSurfaceReady = true;
-        SDLActivity.onNativeSurfaceChanged();
+        // SDLActivity.onNativeSurfaceChanged();
 
 
         if (SDLActivity.mSDLThread == null) {
@@ -1194,25 +1196,27 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
         if ( (event.getSource() & InputDevice.SOURCE_GAMEPAD) != 0 ||
                    (event.getSource() & InputDevice.SOURCE_DPAD) != 0 ) {
             if (event.getAction() == KeyEvent.ACTION_DOWN) {
-                if (SDLActivity.onNativePadDown(event.getDeviceId(), keyCode) == 0) {
+                /*if (SDLActivity.onNativePadDown(event.getDeviceId(), keyCode) == 0) {
                     return true;
-                }
+                }*/
+				return true;
             } else if (event.getAction() == KeyEvent.ACTION_UP) {
-                if (SDLActivity.onNativePadUp(event.getDeviceId(), keyCode) == 0) {
+                /*if (SDLActivity.onNativePadUp(event.getDeviceId(), keyCode) == 0) {
                     return true;
-                }
+                }*/
+				return true;
             }
         }
 
         if( (event.getSource() & InputDevice.SOURCE_KEYBOARD) != 0) {
             if (event.getAction() == KeyEvent.ACTION_DOWN) {
                 //Log.v("SDL", "key down: " + keyCode);
-                SDLActivity.onNativeKeyDown(keyCode);
+                // SDLActivity.onNativeKeyDown(keyCode);
                 return true;
             }
             else if (event.getAction() == KeyEvent.ACTION_UP) {
                 //Log.v("SDL", "key up: " + keyCode);
-                SDLActivity.onNativeKeyUp(keyCode);
+                // SDLActivity.onNativeKeyUp(keyCode);
                 return true;
             }
         }
@@ -1243,7 +1247,7 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
                     mouseButton = 1;    // oh well.
                 }
             }
-            SDLActivity.onNativeMouse(mouseButton, action, event.getX(0), event.getY(0));
+            // SDLActivity.onNativeMouse(mouseButton, action, event.getX(0), event.getY(0));
         } else {
             switch(action) {
                 case MotionEvent.ACTION_MOVE:
@@ -1257,7 +1261,7 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
                             // see the documentation of getPressure(i)
                             p = 1.0f;
                         }
-                        SDLActivity.onNativeTouch(touchDevId, pointerFingerId, action, x, y, p);
+                        // SDLActivity.onNativeTouch(touchDevId, pointerFingerId, action, x, y, p);
                     }
                     break;
 
@@ -1281,7 +1285,7 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
                         // see the documentation of getPressure(i)
                         p = 1.0f;
                     }
-                    SDLActivity.onNativeTouch(touchDevId, pointerFingerId, action, x, y, p);
+                    // SDLActivity.onNativeTouch(touchDevId, pointerFingerId, action, x, y, p);
                     break;
 
                 case MotionEvent.ACTION_CANCEL:
@@ -1295,7 +1299,7 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
                             // see the documentation of getPressure(i)
                             p = 1.0f;
                         }
-                        SDLActivity.onNativeTouch(touchDevId, pointerFingerId, MotionEvent.ACTION_UP, x, y, p);
+                        // SDLActivity.onNativeTouch(touchDevId, pointerFingerId, MotionEvent.ACTION_UP, x, y, p);
                     }
                     break;
 
@@ -1347,9 +1351,9 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
                     y = event.values[1];
                     break;
             }
-            SDLActivity.onNativeAccel(-x / SensorManager.GRAVITY_EARTH,
+            /*SDLActivity.onNativeAccel(-x / SensorManager.GRAVITY_EARTH,
                                       y / SensorManager.GRAVITY_EARTH,
-                                      event.values[2] / SensorManager.GRAVITY_EARTH - 1);
+                                      event.values[2] / SensorManager.GRAVITY_EARTH - 1);*/
         }
     }
 }
@@ -1384,10 +1388,10 @@ class DummyEdit extends View implements View.OnKeyListener {
         }
 
         if (event.getAction() == KeyEvent.ACTION_DOWN) {
-            SDLActivity.onNativeKeyDown(keyCode);
+            // SDLActivity.onNativeKeyDown(keyCode);
             return true;
         } else if (event.getAction() == KeyEvent.ACTION_UP) {
-            SDLActivity.onNativeKeyUp(keyCode);
+            // SDLActivity.onNativeKeyUp(keyCode);
             return true;
         }
 
@@ -1405,7 +1409,7 @@ class DummyEdit extends View implements View.OnKeyListener {
         // FIXME: An even more effective way would be if Android provided this out of the box, but where would the fun be in that :)
         if (event.getAction()==KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
             if (SDLActivity.mTextEdit != null && SDLActivity.mTextEdit.getVisibility() == View.VISIBLE) {
-                SDLActivity.onNativeKeyboardFocusLost();
+                // SDLActivity.onNativeKeyboardFocusLost();
             }
         }
         return super.onKeyPreIme(keyCode, event);
@@ -1442,11 +1446,11 @@ class SDLInputConnection extends BaseInputConnection {
             if (event.isPrintingKey()) {
                 commitText(String.valueOf((char) event.getUnicodeChar()), 1);
             }
-            SDLActivity.onNativeKeyDown(keyCode);
+            // SDLActivity.onNativeKeyDown(keyCode);
             return true;
         } else if (event.getAction() == KeyEvent.ACTION_UP) {
 
-            SDLActivity.onNativeKeyUp(keyCode);
+            // SDLActivity.onNativeKeyUp(keyCode);
             return true;
         }
         return super.sendKeyEvent(event);
@@ -1567,8 +1571,8 @@ class SDLJoystickHandler_API12 extends SDLJoystickHandler {
                     }
 
                     mJoysticks.add(joystick);
-                    SDLActivity.nativeAddJoystick(joystick.device_id, joystick.name, 0, -1,
-                                                  joystick.axes.size(), joystick.hats.size()/2, 0);
+                    /*SDLActivity.nativeAddJoystick(joystick.device_id, joystick.name, 0, -1,
+                                                  joystick.axes.size(), joystick.hats.size()/2, 0);*/
                 }
             }
         }
@@ -1588,7 +1592,7 @@ class SDLJoystickHandler_API12 extends SDLJoystickHandler {
 
         for(int i=0; i < removedDevices.size(); i++) {
             int device_id = removedDevices.get(i).intValue();
-            SDLActivity.nativeRemoveJoystick(device_id);
+            // SDLActivity.nativeRemoveJoystick(device_id);
             for (int j=0; j < mJoysticks.size(); j++) {
                 if (mJoysticks.get(j).device_id == device_id) {
                     mJoysticks.remove(j);
@@ -1620,12 +1624,12 @@ class SDLJoystickHandler_API12 extends SDLJoystickHandler {
                             InputDevice.MotionRange range = joystick.axes.get(i);
                             /* Normalize the value to -1...1 */
                             float value = ( event.getAxisValue( range.getAxis(), actionPointerIndex) - range.getMin() ) / range.getRange() * 2.0f - 1.0f;
-                            SDLActivity.onNativeJoy(joystick.device_id, i, value );
+                            // SDLActivity.onNativeJoy(joystick.device_id, i, value );
                         }
                         for (int i = 0; i < joystick.hats.size(); i+=2) {
                             int hatX = Math.round(event.getAxisValue( joystick.hats.get(i).getAxis(), actionPointerIndex ) );
                             int hatY = Math.round(event.getAxisValue( joystick.hats.get(i+1).getAxis(), actionPointerIndex ) );
-                            SDLActivity.onNativeHat(joystick.device_id, i/2, hatX, hatY );
+                            // SDLActivity.onNativeHat(joystick.device_id, i/2, hatX, hatY );
                         }
                     }
                     break;
@@ -1657,14 +1661,14 @@ class SDLGenericMotionListener_API12 implements View.OnGenericMotionListener {
                     case MotionEvent.ACTION_SCROLL:
                         x = event.getAxisValue(MotionEvent.AXIS_HSCROLL, 0);
                         y = event.getAxisValue(MotionEvent.AXIS_VSCROLL, 0);
-                        SDLActivity.onNativeMouse(0, action, x, y);
+                        // SDLActivity.onNativeMouse(0, action, x, y);
                         return true;
 
                     case MotionEvent.ACTION_HOVER_MOVE:
                         x = event.getX(0);
                         y = event.getY(0);
 
-                        SDLActivity.onNativeMouse(0, action, x, y);
+                        // SDLActivity.onNativeMouse(0, action, x, y);
                         return true;
 
                     default:

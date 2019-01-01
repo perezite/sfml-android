@@ -129,7 +129,7 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
-      <LibraryDependencies>m;log;GLESv2;SDL2;SDL2_image;%(LibraryDependencies)</LibraryDependencies>
+      <LibraryDependencies>m;log;GLESv2;%(LibraryDependencies)</LibraryDependencies>
       <AdditionalDependencies>
       </AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)Packaging\Android\libs\$(TargetArchAbi);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -154,7 +154,7 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
-      <LibraryDependencies>m;log;GLESv2;SDL2;SDL2_image;%(LibraryDependencies)</LibraryDependencies>
+      <LibraryDependencies>m;log;GLESv2;%(LibraryDependencies)</LibraryDependencies>
       <AdditionalDependencies>
       </AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)Packaging\Android\libs\$(TargetArchAbi);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -174,7 +174,7 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
-      <LibraryDependencies>m;log;GLESv2;SDL2;SDL2_image;%(LibraryDependencies)</LibraryDependencies>
+      <LibraryDependencies>m;log;GLESv2;%(LibraryDependencies)</LibraryDependencies>
       <AdditionalDependencies>
       </AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)Packaging\Android\libs\$(TargetArchAbi);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -199,7 +199,7 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
-      <LibraryDependencies>m;log;GLESv2;SDL2;SDL2_image;%(LibraryDependencies)</LibraryDependencies>
+      <LibraryDependencies>m;log;GLESv2;%(LibraryDependencies)</LibraryDependencies>
       <AdditionalDependencies>
       </AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)Packaging\Android\libs\$(TargetArchAbi);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
