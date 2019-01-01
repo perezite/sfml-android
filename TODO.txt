@@ -1,0 +1,46 @@
+TODO:	
+- Bootstrapping
+	- Erweiterte Renderer implementieren
+		- IndexedRenderer fertigstellen
+		- BatchedRenderer
+		- TexturedBatchedRenderer (Rendert einige diffuse Drawables, einige texturierte Drawables, und einige texturierte Partikel in einem DrawBatch)
+	- Renderer in Orbis einbinden
+		- Falls das nicht klappt: Renderer2 in Sandbox-Repository weiterbearbeiten
+		- Falls das auch nicht klappt: Commit 08b2314ab4b6f38d1cf5b4003c2bf5629914bc6d wiederherstellen und an Renderer2 Sandbox weiterarbeiten
+	- Einsichten zum Thema Rendering dokumentieren
+	- Plan aktualisieren
+
+LATER:
+	- LevelBuilder im Bootstrapping-Plan hinzufügen
+	- Release-Speedups implementieren von hier: https://www.youtube.com/watch?v=ImtWD_9OAeY&list=PLlrATfBNZ98fqE45g3jZA_hLGUrD4bo6_&index=14 (zB. Funktions-Inlining)
+	- Stuff mit Transforms dokumentieren: GL/GLCore, GPU/CPU, PDF auf Desktop, Stuff in https://learnopengl.com/Getting-started/Hello-Triangle, wieso ich glBufferSubData brauche..
+	- Den Spass installieren: https://marketplace.visualstudio.com/items?itemName=DanielScherzer.GLSL
+	- Bootstrapping nochmals durchführen
+	- TODO updaten
+	- Rotierendes Dreieck im SFML-Stil implementieren:
+		- Console-App anpassen, so dass sie das Dreieck rendert
+		- Wrapper-Methoden für SDL und OpenGL einbinden
+	- ShapeArray implementieren und damit 2 Dreiecke rendern
+	- 2 rotierende Dreiecke im SFML-Stil implementieren mit Batching
+	- 10000 rotierende Dreiecke im SFML-Stil implementieren
+		- Vorigen Code so anpassen, dass er so schnell wie möglich rendert
+	- 10000 rotierende Partikel im SFML-Stil implementieren
+		- Code so anpassen, dass er so schnell wie möglich rendert
+	- Tool implementieren, welches automatisch Orbis.h generiert und als Pre-Build Step implementieren
+	- Source-Code entsprechend anpassen
+	- Zwei Sprites implementieren im SFML-Stil
+		- Level-Funktionalität hinzfügen
+		- Orbis erweitern mit Console-Klassen, welche Text ausgeben
+		- Sandbox erstellen, welche die Sprites rendert
+		- Console-App anpassen, so dass sie die Sprites rendert
+	- Atlassing implementieren im SFML-Stil
+		- Orbis erweitern durch Console-Klassen
+		- Sandbox erweitern
+		- Console-Klassen effektiv implementieren
+	- Restliche Orbis-Funtkionalität im gleichen Dreisatz-Stil implementieren
+		- Orbis erweitern durch Console-Klassen
+		- Sandbox erweitern
+		- Console-Klassen effektiv implementieren
+- Merge auf Main
+- Restliche TODO's aus OneNote wieder in TODO aufnehmen
+	
