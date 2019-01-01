@@ -3,6 +3,7 @@
   <ItemGroup>
     <ClCompile Include="SDL_android_main.c" />
     <ClCompile Include="Precompiled.cpp" />
+    <ClCompile Include="..\..\..\..\src\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Precompiled.h" />
